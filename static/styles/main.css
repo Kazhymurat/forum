@@ -1,0 +1,65 @@
+h1 {
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: #c0392b;
+}
+.buttons{
+  display: flex;
+  justify-content: flex-end;
+  color: #c0392b;
+}
+.login{
+  justify-content: flex-end;
+}
+.signup{
+  justify-content: flex-end;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  color: #c0392b
+}
+
+.plea{
+  display: flex;
+  justify-content: center;
+}
+.voteButton{
+  display: flex;
+  justify-content: flex-start;
+  height: 0;
+
+}
+
+.posts{
+  display: flex;
+  justify-content: center;
+}
+
+.post{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  width: 700px;
+  border-radius: 5px;
+}
+
+.options{
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.ptext{
+  margin-left: 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+body{
+  background-color: gainsboro;
+}
