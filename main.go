@@ -6,8 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	handlers "./cookies/handlers"
 	_ "github.com/mattn/go-sqlite3"
+
+	handlers "./cookies/handlers"
 )
 
 type user struct {
@@ -39,6 +40,7 @@ func UserSignUp(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 		}
 		http.Redirect(w, r, "/login", 301)
+
 	} else {
 		http.ServeFile(w, r, "static/signup.html")
 	}
@@ -48,7 +50,19 @@ func UserSignUp(w http.ResponseWriter, r *http.Request) {
 func UserLogIn(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
-		fmt.Fprint(w, "Baha toxic")
+
+		email := r.FormValue("email")
+
+		row := database.QueryRow("select * from user where email = $1", email)
+		user := user{}
+		err := row.Scan(&user.ID, &user.email, &user.username, &user.password)
+
+		if err != nil {
+			fmt.Fprint(w, "WRONG EMAIL")
+		}
+		http.Redirect(w, r, "/", 301)
+		http.HandleFunc("/", userSession)
+
 	} else {
 		http.ServeFile(w, r, "static/login.html")
 	}
@@ -77,7 +91,7 @@ func userSession(w http.ResponseWriter, r *http.Request) {
 		Next:   handler,
 	}
 
-	http.Handle("/login", loginHandler)
+	http.Handle("/", loginHandler)
 	http.Handle("/logout", logoutHandler)
 
 }
@@ -95,7 +109,6 @@ func main() {
 	defer db.Close()
 
 	http.Handle("/", fs)
-	http.HandleFunc("/index", userSession)
 	http.HandleFunc("/signup", UserSignUp)
 	http.HandleFunc("/login", UserLogIn)
 
