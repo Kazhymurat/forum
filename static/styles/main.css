@@ -2,15 +2,18 @@ h1 {
   display: flex;
   justify-content: center;
   color: white;
-  background-color: #c0392b;
+  background-color:#c0392b;
 }
 .buttons{
   display: flex;
   justify-content: flex-end;
   color: #c0392b;
+  
+
 }
 .login{
   justify-content: flex-end;
+  margin-right: 2px;
 }
 .signup{
   justify-content: flex-end;
@@ -26,12 +29,6 @@ h2 {
   display: flex;
   justify-content: center;
 }
-.voteButton{
-  display: flex;
-  justify-content: flex-start;
-  height: 0;
-
-}
 
 .posts{
   display: flex;
@@ -41,23 +38,28 @@ h2 {
 .post{
   display: flex;
   justify-content: space-between;
-  background-color: white;
-  width: 700px;
-  border-radius: 5px;
+  
 }
 
 .options{
-  padding-left: 5%;
+  padding-left: 4%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
 
+.voteButton{
+  height: 25%;
 }
 
 .ptext{
-  margin-left: 5%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  width: 700px;
+  border-radius: 5px;
+ 
 }
 
 body{
