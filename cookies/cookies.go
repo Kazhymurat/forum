@@ -26,7 +26,8 @@ func main() {
 		rw.Write([]byte("OK"))
 	})
 
-	loginHandler := handlers.Login{Name: cookieName,
+	loginHandler := handlers.Login{
+		Name:   cookieName,
 		Domain: cookieDomain,
 		Path:   cookiePath,
 		Value:  cookieValue,
