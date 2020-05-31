@@ -8,8 +8,6 @@ import (
 type Login struct {
 	Name   string
 	Value  string
-	Path   string
-	Domain string
 	MaxAge int
 	Next   http.Handler
 }
@@ -18,8 +16,6 @@ func (l Login) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{
 		Name:     l.Name,
 		Value:    l.Value,
-		Domain:   l.Domain,
-		Path:     l.Path,
 		MaxAge:   l.MaxAge,
 		HttpOnly: true,
 	}

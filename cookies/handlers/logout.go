@@ -16,8 +16,6 @@ func (l Logout) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	cookie := http.Cookie{
 		Name:     l.Name,
 		Value:    "",
-		Domain:   l.Domain,
-		Path:     l.Path,
 		MaxAge:   0,
 		HttpOnly: true,
 	}

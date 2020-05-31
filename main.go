@@ -72,23 +72,19 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 func userSession(w http.ResponseWriter, r *http.Request) {
 
 	handler := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		rw.Write([]byte("Fucking shit"))
+		rw.Write([]byte("OK"))
 	})
 
 	loginHandler := handlers.Login{
 		Name:   "session",
-		Domain: "yoyo.com",
-		Path:   "/",
 		Value:  "logged in",
 		MaxAge: 60,
 		Next:   handler,
 	}
 
 	logoutHandler := handlers.Logout{
-		Name:   "logout",
-		Domain: "yoyo.com",
-		Path:   "/",
-		Next:   handler,
+		Name: "logout",
+		Next: handler,
 	}
 
 	http.Handle("/", loginHandler)
