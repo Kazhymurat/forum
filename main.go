@@ -47,7 +47,18 @@ func UserSignUp(w http.ResponseWriter, r *http.Request) {
 func UserLogIn(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
-		fmt.Fprint(w, "Baha toxic")
+
+		email := r.FormValue("email")
+
+		row := database.QueryRow("select * from user where email = $1", email)
+		user := user{}
+		err := row.Scan(&user.ID, &user.email, &user.username, &user.password)
+
+		if err != nil {
+			fmt.Fprint(w, "WRONG EMAIL")
+		}
+		http.Redirect(w, r, "/", 301)
+
 	} else {
 		http.ServeFile(w, r, "static/login.html")
 	}
