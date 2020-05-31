@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	handlers "./cookies/handlers"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -53,6 +54,34 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//Cookies for session
+func userSession(w http.ResponseWriter, r *http.Request) {
+
+	handler := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+		rw.Write([]byte("Fucking shit"))
+	})
+
+	loginHandler := handlers.Login{
+		Name:   "session",
+		Domain: "yoyo.com",
+		Path:   "/",
+		Value:  "logged in",
+		MaxAge: 60,
+		Next:   handler,
+	}
+
+	logoutHandler := handlers.Logout{
+		Name:   "logout",
+		Domain: "yoyo.com",
+		Path:   "/",
+		Next:   handler,
+	}
+
+	http.Handle("/login", loginHandler)
+	http.Handle("/logout", logoutHandler)
+
+}
+
 func main() {
 
 	fs := http.FileServer(http.Dir("./static"))
@@ -66,6 +95,7 @@ func main() {
 	defer db.Close()
 
 	http.Handle("/", fs)
+	http.HandleFunc("/index", userSession)
 	http.HandleFunc("/signup", UserSignUp)
 	http.HandleFunc("/login", UserLogIn)
 

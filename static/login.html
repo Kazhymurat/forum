@@ -7,17 +7,17 @@
     <title>Sign Up</title>
 </head>
 <body>
-<form action="/signup" method="POST">
+<form action="/signup" method="GET">
    <div class="sign">
-       <p>By having a Forum account, you can post, vote and comment on all your favorite Forum content.</p>
-       <form action="/signup">
+       <p>Welcome back - enter your credentials</p>
+       <form action="/login">
         <label for="email">E-mail:</label><br>
         <input type="email" id="email" name="email"><br>
-        <label for="username">Choose your  username:</label><br>
-        <input type="text" id="username" name="username"><br><br>
         <label for="password">Choose your  password:</label><br>
         <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Log In">
+        <p>If you are new here - Sing Up</p>
+        <input type=button class="signup" onclick="location.href='signup.html'" value='Sign Up'>
       </form>    
     </div>         
 </body>
