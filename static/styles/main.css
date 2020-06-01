@@ -65,3 +65,7 @@ h2 {
 body{
   background-color: gainsboro;
 }
+
+.attention{
+  color: #c0392b;
+}
