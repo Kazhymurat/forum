@@ -1,0 +1,46 @@
+.nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* body{
+    display: flex;
+    align-content: space-between; 
+} */
+
+.salem-hat{
+    margin-top: 8%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.post{
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .ptext{
+  background-color: greenyellow;
+  width: 700px;
+  border-radius: 5px;
+ }
+ 
+
+.options {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

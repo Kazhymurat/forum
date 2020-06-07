@@ -1,9 +1,10 @@
-h1 {
+/* h1 {
   display: flex;
   justify-content: center;
   color: white;
   background-color:#c0392b;
-}
+  
+} */
 .buttons{
   display: flex;
   justify-content: flex-end;
@@ -11,49 +12,49 @@ h1 {
   
 
 }
-.login{
+/* .login{
   justify-content: flex-end;
   margin-right: 2px;
-}
-.signup{
+} */
+/* .signup{
   justify-content: flex-end;
-}
+} */
 
-h2 {
+/* h2 {
   display: flex;
   justify-content: center;
   color: #c0392b
-}
+} */
 
-.plea{
+/* .plea{
   display: flex;
   justify-content: center;
-}
+} */
 
-.posts{
+/* .posts{
   display: flex;
   justify-content: center;
-}
+} */
 
-.post{
+/* .post{
   display: flex;
   justify-content: space-between;
   
-}
+} */
 
-.options{
+/* .options{
   padding-left: 4%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
+} */
 
-.voteButton{
+/* .voteButton{
   height: 25%;
-}
+} */
 
-.ptext{
+/* .ptext{
   display: flex;
   justify-content: center;
   background-color: white;
@@ -68,4 +69,4 @@ body{
 
 .attention{
   color: #c0392b;
-}
+} */

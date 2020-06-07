@@ -5,23 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Welcome, friend</title>
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="styles/alpha.css">
 </head>
 <body>
-<h1>FORUM</h1>  
 <form action="/" method="GET">
-<div class="buttons">
-<input type=button class="login" onclick="location.href='/login'" value='Log In'>
+      <div class="container-fluid">
+      <nav class="navbar navbar-inverse bg-dark fixed-top">
+          <div class="navbar-header">
+              <h2 class="text-success">Forum</h2>
+            </div>
+    <div class="buttons">
+      <input type=button class="btn btn-success btn-sm" onclick="location.href='/login'" value='Log In'>
+      <input type=button class="btn btn-success btn-sm " onclick="location.href='/signup'" value='Sign Up'>
+    </div>
+  </nav>
 </div>
-</form>
-<div class="plea">
+<!-- <div class="plea">
   <p>Давай дружище, напишем историю аудита одного проекта?</p>
+</div> -->
+<div class="salem-hat">
+    <p>One of my greatest talents is recognizing talent in others and giving them the forum to shine.</p>
 </div>
-<h2>POSTS</h2>
 <div class="posts">
+    <h2>POSTS</h2>
 <div class="post">
   <div class="ptext">
-    <p>Проект "forum" должен работать с использованием базы данных - SQLite3</p>
+    <p>I don't mind Twitter. I think it's a lot of nonsense, but at least, to me, Twitter is just more of a public forum to have conversation.</p>
   </div>
   <div class="options">
     <button aria-label="upvote" class=voteButton></button>
@@ -30,6 +43,7 @@
   </div>
 </div>
 </div>
+</form>
 </body>
 </html>
 
