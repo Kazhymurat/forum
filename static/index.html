@@ -6,22 +6,81 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Welcome, friend</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="styles/alpha.css">
+  <!-- <link rel="stylesheet" href="styles/beta.css"> -->
 </head>
 <body>
+  <style>
+    .nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+a {
+    color: whitesmoke;
+  }
+
+.salem-hat{
+    margin-top: 8%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.posts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.post{
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ .ptext{
+  background-color: greenyellow;
+  width: 700px;
+  border-radius: 5px;
+ }
+ 
+
+.options {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+</style>
 <form action="/" method="GET">
       <div class="container-fluid">
       <nav class="navbar navbar-inverse bg-dark fixed-top">
           <div class="navbar-header">
               <h2 class="text-success">Forum</h2>
             </div>
+            <div class="opt">
+                {{if .Auth}}
+
+                <!-- <ul class="nav navbar-nav navbar-right"> -->
+                    <a href="/profile"><span class="glyphicon glyphicon-user text-success"></span> {{ .Username}}</a>
+                    <a href="/logout"><span class="glyphicon glyphicon-log-out text-success"></span> Log Out</a>
+                  <!-- <h2>{{ .Username}}</h2> -->
+                <!-- </ul> -->
+               {{else}}
     <div class="buttons">
-      <input type=button class="btn btn-success btn-sm" onclick="location.href='/login'" value='Log In'>
-      <input type=button class="btn btn-success btn-sm " onclick="location.href='/signup'" value='Sign Up'>
+      <input type=button class="btn btn-success btn-lg" onclick="location.href='/login'" value='Log In'>
+      <input type=button class="btn btn-success btn-lg" onclick="location.href='/signup'" value='Sign Up'>
     </div>
+    {{end}}
+  </div>
   </nav>
 </div>
 <!-- <div class="plea">
@@ -30,6 +89,11 @@
 <div class="salem-hat">
     <p>One of my greatest talents is recognizing talent in others and giving them the forum to shine.</p>
 </div>
+<!-- <div>
+{{if .Auth}}
+  <h2>{{ .}}</h2>
+  {{end}}
+</div> -->
 <div class="posts">
     <h2>POSTS</h2>
 <div class="post">

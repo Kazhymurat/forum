@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"path"
 	"text/template"
 	"time"
 
@@ -17,6 +18,11 @@ type user struct {
 	email    string
 	username string
 	password string
+}
+
+type session struct {
+	Username string
+	Auth     bool
 }
 
 var cookies map[int]*http.Cookie
@@ -77,6 +83,58 @@ func UserSignUp(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//UserMain is a handler to execute main page
+func UserMain(w http.ResponseWriter, r *http.Request) {
+
+	id, auth := IsAuthorized(r)
+
+	if auth {
+		db, err := sql.Open("sqlite3", "database/forum.db")
+
+		if err != nil {
+			log.Println(err)
+		}
+		database = db
+		defer db.Close()
+
+		row := database.QueryRow("select * from user where ID = $1", id)
+		user := user{}
+		err = row.Scan(&user.ID, &user.email, &user.username, &user.password)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		data := session{
+			Username: user.username,
+			Auth:     true,
+		}
+
+		var (
+			tmpl = template.Must(template.ParseFiles(path.Join("./static", "index.html")))
+		)
+		err = tmpl.Execute(w, data)
+		if err != nil {
+			log.Fatalf("execution failed: %s", err)
+		}
+
+	} else {
+
+		data := session{
+			Username: "",
+			Auth:     false,
+		}
+
+		var (
+			tmpl = template.Must(template.ParseFiles(path.Join("./static", "index.html")))
+		)
+		err := tmpl.Execute(w, data)
+		if err != nil {
+			log.Fatalf("execution failed: %s", err)
+		}
+	}
+}
+
 //UserLogIn is a handler to log in user with its appropriate credentials
 func UserLogIn(w http.ResponseWriter, r *http.Request) {
 
@@ -85,6 +143,9 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_, auth := IsAuthorized(r)
+
+	//for my purpose to see map of cookies
+	// fmt.Println(cookies)
 
 	if auth {
 		fmt.Fprint(w, "YOU ARE ALREADY IN")
@@ -126,9 +187,26 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 
 				cookies[user.ID] = cookie
 				http.SetCookie(w, cookie)
-				// fmt.Println(cookie)
+				fmt.Println("this is your cookie:", cookie)
 
-				http.Redirect(w, r, "/", 301)
+				data := session{
+					Username: user.username,
+					Auth:     true,
+				}
+
+				var (
+					tmpl = template.Must(template.ParseFiles(path.Join("./static", "index.html")))
+				)
+				err := tmpl.Execute(w, data)
+				if err != nil {
+					log.Fatalf("execution failed: %s", err)
+				}
+
+				// tmpl, _ := template.ParseFiles("./static/index.html")
+				// tmpl.Execute(w, User)
+				// fmt.Println(Auth)
+
+				// http.Redirect(w, r, "/", 301)
 				// fmt.Fprint(w, "Mission completed")
 
 			} else {
@@ -145,6 +223,14 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 			tmpl.Execute(w, WP)
 		}
 	}
+}
+
+//UserLogOut ends session for user
+func UserLogOut(w http.ResponseWriter, r *http.Request) {
+
+	ClearSession(w)
+	http.Redirect(w, r, "/", 302)
+
 }
 
 //IsAuthorized validates is this session already taken
@@ -167,5 +253,17 @@ func IsAuthorized(r *http.Request) (int, bool) {
 			}
 		}
 	}
+
 	return 0, false
+}
+
+//ClearSession ends the session
+func ClearSession(w http.ResponseWriter) {
+	cookie := &http.Cookie{
+		Name:   "session_token",
+		Value:  "",
+		Path:   "/",
+		MaxAge: -1,
+	}
+	http.SetCookie(w, cookie)
 }

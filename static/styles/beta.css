@@ -3,10 +3,9 @@
     justify-content: flex-end;
 }
 
-/* body{
-    display: flex;
-    align-content: space-between; 
-} */
+a {
+    color: whitesmoke;
+  }
 
 .salem-hat{
     margin-top: 8%;
