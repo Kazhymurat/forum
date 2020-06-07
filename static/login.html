@@ -5,20 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign Up</title>
+    <!-- <link rel="stylesheet" href="styles/main.css"> -->
 </head>
+<style>
+.wp {
+  color: red;
+}
+</style>
 <body>
 <form action="/login" method="POST">
-   <div class="login">
+   <div class="log">
        <p>Welcome back - enter your credentials</p>
-       
         <label for="email">E-mail:</label><br>
         <input type="email" id="email" name="email"><br>
         <label for="password">Choose your  password:</label><br>
+        <div>
+        <!-- <template> -->
+          {{if .}}
+            <span class="wp"><p>Wrong Password</p></span>
+          {{end}}
+        <!-- </template> -->
+      </div>
+        
         <input type="password" id="password" name="password"><br><br>
         <input type="submit" value="Log In">
         <p>If you are new here - Sign Up</p>
         <input type=button class="signup" onclick="location.href='signup.html'" value='Sign Up'>
       </form>    
-    </div>         
+    </div>           
 </body>
 </html>

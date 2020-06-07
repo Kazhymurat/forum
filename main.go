@@ -60,35 +60,47 @@ func UserLogIn(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Fprint(w, "WRONG EMAIL")
 		}
-		http.Redirect(w, r, "/", 301)
-		http.HandleFunc("/", userSession)
 
+		fmt.Println("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
+		// http.Redirect(w, r, "/", 301)
+
+		testReq, err := http.NewRequest("GET", "/login", nil)
+		if err != nil {
+			w.Write([]byte("failed to create request"))
+		}
+		fmt.Println(testReq.Method)
+		UserSession(w, testReq)
 	} else {
 		http.ServeFile(w, r, "static/login.html")
 	}
 }
 
 //Cookies for session
-func userSession(w http.ResponseWriter, r *http.Request) {
+func UserSession(w http.ResponseWriter, r *http.Request) {
 
-	handler := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-		rw.Write([]byte("OK"))
-	})
+	if r.Method == "GET" {
 
-	loginHandler := handlers.Login{
-		Name:   "session",
-		Value:  "logged in",
-		MaxAge: 60,
-		Next:   handler,
+		handler := http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+			rw.Write([]byte("it works"))
+		})
+
+		loginHandler := handlers.Login{
+			Name:   "session",
+			Value:  "logged in",
+			MaxAge: 60,
+			Next:   handler,
+		}
+
+		logoutHandler := handlers.Logout{
+			Name: "logout",
+			Next: handler,
+		}
+		loginHandler.ServeHTTP(w, r)
+		http.Handle("/login", loginHandler)
+		http.Handle("/logout", logoutHandler)
+	} else {
+		w.Write([]byte("doesn't work"))
 	}
-
-	logoutHandler := handlers.Logout{
-		Name: "logout",
-		Next: handler,
-	}
-
-	http.Handle("/", loginHandler)
-	http.Handle("/logout", logoutHandler)
 
 }
 
